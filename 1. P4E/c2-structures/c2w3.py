@@ -11,7 +11,7 @@ def lists_fun():
     l2.append(3)
     print("new list initiated from scratch:")
     print(l2[0:len(l2)])
-    l2 = l2.sort()
+    l2.sort()
     # len, min, max, sort,
     # split - breaks a string with spaces: string = "Three new words"; string.split(\delimeter;)
 
