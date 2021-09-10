@@ -1,3 +1,9 @@
-* Learning python here.
+** Learning python here.
 
-** README.md file.
+*git
+*python
+*agile
+*django
+*postgre
+*html/css
+*docker/kubernetes
