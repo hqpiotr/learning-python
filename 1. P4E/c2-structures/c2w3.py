@@ -71,6 +71,7 @@ def check_tuples():
 
 def list_comprehension_IMPORTANT():
     slownik = {'a': 8, 'b': 5, 'c': 3}
+    print("---> check if list comprehension works:")
     print(sorted([(v, k) for k, v in slownik.items()]))
 
     '''
@@ -84,8 +85,8 @@ def list_comprehension_IMPORTANT():
     print(l)
 
     l2 = list()
-    l2 = sorted([v, k] for k,v in slownik.items())
-    print(l2)
+    l2 = sorted((v, k) for k,v in slownik.items())
+    print('---> check if [] work:', l2)
 
     l3 = [4, 7, 1, 3, 2]
     l3 = sorted(l3)
