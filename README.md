@@ -1,9 +1,7 @@
-** Learning python here.
-
-*git
-*python
-*agile
-*django
-*postgre
-*html/css
-*docker/kubernetes
+* git
+* python
+* agile
+* django
+* postgre
+* html/css
+* docker/kubernetes
