@@ -1,0 +1,12 @@
+
+From: Anonymous, Writer (Company - PL) <anonymous.writer@company.com> 
+Sent: Wednesday, September 8, 2021 4:48 PM
+Subject: ticket-12178 Removal of exclude tags for MNL and TNL objects in model - 7135 related
+
+Hi,
+
+It is true that NIDD is the same, but still there are some configuratiom differences between BTS configured as ProductVariantPlanned = x and y. 
+And it seems it is still worth to check on both x and y Classical mode if proper full config is exchanged between a and b, c and d and in opposite way back, with validation of parameters. 
+
+Best Regards
+
