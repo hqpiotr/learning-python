@@ -1,6 +1,7 @@
 # web communication
 # sockets, urllib
 import socket
+import time
 import urllib.request, urllib.parse, urllib.error
 
 def get_file_using_socket():

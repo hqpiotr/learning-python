@@ -28,6 +28,10 @@ def re_findall(regexp, string):
     list = re.findall(regexp, string)
     print('re_findall: ' + regexp + '\t', '|| input:\t', string, '|| output:\t', list)
 
+def replace(sentence):
+    sentence = re.sub(r'cat', 'dog', sentence)
+    print(sentence)
+
 
 def print_explanations():
     print('https://docs.python.org/3/library/re.html\n')
@@ -44,6 +48,10 @@ def print_explanations():
     print('[^AEIOU] is a set\t ^ negates all the chars: return if NOT having these (must be first char in set)')
 
     print('\n() parenthesis in searching specify start and stop of a match: \'^From (\S+@\S+)\' will not return the "^From" part')
+    print("re.match()\t searches only at the beginning of the string/line")
+    print("re.search()\t searches everywhere in the string/line")
+    print("re.sub(pattern, replacement, string)\t substitutes pattern with replacement")
+    print("re.match().group() or group(1)/(2) returns the value of the string, if found || otherwise None")
 """
 def greedy_matching(string):
     result = re.findall('^F.+:', string)
@@ -78,6 +86,7 @@ def main():
     # greedy_matching("From: John Doe sent on Thursday 08th with: HELLO")
     print_explanations()
     # print(cheat_sheet())
+    # replace('cats are smarter than dogs')
 
 if __name__ == "__main__":
     main()

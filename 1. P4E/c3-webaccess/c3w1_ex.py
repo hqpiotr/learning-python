@@ -16,8 +16,9 @@ def solution_1_calc_numbers_from_file(filename):
 
 def solution_2_calc_numbers_from_file(filename):
     file = open(filename)
-    values = re.findall('[0-9]+', file.read())
     ints = []
+
+    values = re.findall('[0-9]+', file.read())
 
     for v in values:
         ints.append(int(v))
