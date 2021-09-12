@@ -66,6 +66,5 @@ def main():
     parse_without_bs4(link)
     # using_bs4(longer_link)
 
-
 if __name__ == "__main__":
     main()

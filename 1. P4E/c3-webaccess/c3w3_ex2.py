@@ -14,14 +14,12 @@ def dostuff(link):
     nextlink = link
     finalname = ""
 
-    for hop in range(int(amount_of_hops)):
+    for hop in range(amount_of_hops):
         file = urllib.request.urlopen(nextlink)
         soup = BeautifulSoup(file, "html.parser")
-
-        anchor = soup('a')
         index = 0
 
-        for a in anchor:
+        for a in soup('a'):
             index += 1
             if index == number_in_sequence:
                 href = a.get("href")
@@ -32,8 +30,6 @@ def dostuff(link):
                 continue
         finalname = re.search(r'known_by_(\w+).html', nextlink).group(1)
     print("\nAnswer is:", finalname)
-
-
 
 
 if __name__ == "__main__":
