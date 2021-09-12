@@ -1,6 +1,7 @@
 import urllib.request
 import re
 from bs4 import BeautifulSoup
+<<<<<<< HEAD
 import requests
 # TODO: read the file from Web, parse numbers and print sum.
 
@@ -65,7 +66,6 @@ def main():
     # using_bs4(link)
     parse_without_bs4(link)
     # using_bs4(longer_link)
-
 
 if __name__ == "__main__":
     main()
