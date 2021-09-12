@@ -78,15 +78,28 @@ def cheat_sheet():
     (        Indicates where string extraction is to start\n\
     )        Indicates where string extraction is to end\n"
 
+def playground(cond, string):
+    if cond == "text":
+        if re.search(r'\d+', string):
+            print(re.search(r'\d+', string).group(0))
+    elif cond == "html":
+        pattern = re.compile(r'comments.+>(\d+)')
+
+        if re.search(pattern, string):
+            print(re.search(pattern, string).group(1))
+
+
 def main():
     filename = "..\c2-structures\input\input_spammers.txt"
     # re_search(filename)
     # re_findall('[0-9]+', "My 2 favorite numbers are: 19 and 42.")
     # re_findall('ab+', '8zaba a aba caba daba aabb abbbbb KONIEC')
     # greedy_matching("From: John Doe sent on Thursday 08th with: HELLO")
-    print_explanations()
+    # print_explanations()
     # print(cheat_sheet())
     # replace('cats are smarter than dogs')
+    playground("text", '''cats 12 dogs 23 giraffes''')
+    playground("html", '''<tr><td>Uchenna</td><td><span class="comments">64</span></td></tr>''')
 
 if __name__ == "__main__":
     main()
