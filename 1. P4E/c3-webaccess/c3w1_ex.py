@@ -36,6 +36,6 @@ def best_solution(fn):
 
 if __name__ == "__main__":
     name = "input/regex_sum_1353131.txt"
-    # solution_1_calc_numbers_from_file(name)
+    solution_1_calc_numbers_from_file(name)
     # solution_2_calc_numbers_from_file(name)
-    best_solution(name)
+    # best_solution(name)

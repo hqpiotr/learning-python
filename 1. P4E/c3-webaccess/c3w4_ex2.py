@@ -1,12 +1,13 @@
+# SOUP HTML parser
 import re
 import urllib.request
 from bs4 import BeautifulSoup
 
 """
-get the chain of names, using as input (1) amount of hops and (2) the position 
-of the link on each site. Example: 4, 3 => iterate 4 times, get 3rd from each 
-site, remember the link, output a resulting name. Example below:
- <li style=: 16px;"><a href="http://py4e../known_by_Aniqa.html">Aniqa</a></li>
+    get the chain of names, using as input (1) amount of hops and (2) the position 
+    of the link on each site. Example: 4, 3 => iterate 4 times, get 3rd from each 
+    site, remember the link, output a resulting name. Example below:
+     <li style=: 16px;"><a href="http://py4e../known_by_Aniqa.html">Aniqa</a></li>
 """
 
 def dostuff(link):
