@@ -2,10 +2,12 @@ import re
 import urllib.request
 from bs4 import BeautifulSoup
 
-# TODO: get the chain of names, using as input (1) amount of hops and (2) the position of the link on each site.
-# TODO: example: 4, 3 => iterate 4 times, get 3rd from each site, remember the link, output a resulting name
-# TODO: example: <li style="margin-top: 16px;"><a href="http://py4e-data.dr-chuck.net/known_by_Aniqa.html">Aniqa</a></li>
-
+"""
+get the chain of names, using as input (1) amount of hops and (2) the position 
+of the link on each site. Example: 4, 3 => iterate 4 times, get 3rd from each 
+site, remember the link, output a resulting name. Example below:
+ <li style=: 16px;"><a href="http://py4e../known_by_Aniqa.html">Aniqa</a></li>
+"""
 
 def dostuff(link):
     print('Analyzing URL: ', 'http://py4e-data.dr-chuck.net/known_by_Ilyas.html')
