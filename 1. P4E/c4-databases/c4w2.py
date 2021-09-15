@@ -20,7 +20,6 @@ cursor.execute('''CREATE TABLE Counts (email TEXT, count INTEGER)''')
 file = open('input/mbox-short.txt')
 for line in file:
     if not line.startswith('From: '): continue
-
     # store email
     words = line.split()
     email = words[1]
@@ -28,7 +27,6 @@ for line in file:
     # check if record exists with such email
     cursor.execute('SELECT count FROM Counts WHERE email = ?', (email, ))
     row = cursor.fetchone()
-
     # if not, create it
     if row is None:
         cursor.execute('''INSERT INTO Counts (email, count) VALUES (?, 1)''', (email, ))
