@@ -85,16 +85,19 @@ def read_xml_make_RDBMS(xmlfile):
 
         # First put the artist to db, later on fetch it's ID for related DB. Do similar for other relations.
         sqlptr.execute('INSERT OR IGNORE INTO Artist(name) VALUES (?)', (v_artist,))
-        sqlptr.execute('SELECT id FROM Artist WHERE name = ?', (v_artist,))
-        common_artist_id = sqlptr.fetchone()[0]
+        common_artist_id = sqlptr.lastrowid #TODO: return last row ID returned with PRIMARY KEY (meaning ID)
+        # sqlptr.execute('SELECT id FROM Artist WHERE name = ?', (v_artist,))
+        # common_artist_id = sqlptr.fetchone()[0]
 
         sqlptr.execute('''INSERT OR IGNORE INTO Album(title, artist_id) VALUES (?, ?)''', (v_album, common_artist_id))
-        sqlptr.execute('SELECT id FROM Album WHERE title=?', (v_album,))
-        common_album_id = sqlptr.fetchone()[0]
+        # sqlptr.execute('SELECT id FROM Album WHERE title=?', (v_album,))
+        # common_album_id = sqlptr.fetchone()[0]
+        common_album_id = sqlptr.lastrowid
 
         sqlptr.execute('INSERT OR IGNORE INTO Genre(name) VALUES(?)', (v_genre, ))
-        sqlptr.execute('SELECT id FROM Genre WHERE name=?', (v_genre, ))
-        common_genre_id = sqlptr.fetchone()[0]
+        # sqlptr.execute('SELECT id FROM Genre WHERE name=?', (v_genre, ))
+        # common_genre_id = sqlptr.fetchone()[0]
+        common_genre_id = sqlptr.lastrowid
 
         sqlptr.execute('''
             INSERT OR REPLACE INTO Track(title, album_id, genre_id, len, rating, count) VALUES(?, ?, ?, ?, ?, ?)''',\

@@ -11,11 +11,11 @@ def v2_read_input_write_db(fn):
     sqldb = sqlite3.connect('Counts.sqlite')
     sqlptr = sqldb.cursor()
 
-"""
+    """
     sqlptr.executescript('''
     DROP TABLE IF EXISTS tab1
     ''')
-"""
+    """
     sqlptr.execute('DROP TABLE IF EXISTS Counts')
     sqlptr.execute('''CREATE TABLE Counts(org TEXT, count INTEGER)''')
 
