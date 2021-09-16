@@ -52,57 +52,57 @@ def read_xml_make_RDBMS(xmlfile):
     sqldb = sqlite3.connect('trackdb.sqlite')
     sqlptr = sqldb.cursor()
 
-    # prepare SQL databases
     sqlptr.executescript('''
         DROP TABLE IF EXISTS Artist;
         DROP TABLE IF EXISTS Album;
         DROP TABLE IF EXISTS Track;
         DROP TABLE IF EXISTS Genre;
         
-        CREATE TABLE Artist(
-            id  INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-            name TEXT UNIQUE);
-        
-        CREATE TABLE Album(
-            id  INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-            title TEXT UNIQUE,
-            artist_id INTEGER);
-        
-        CREATE TABLE Genre(
-            id  INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-            name TEXT UNIQUE);
-        
-        CREATE TABLE Track(
-            id  INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-            title TEXT UNIQUE,
-            album_id INTEGER,
-            genre_id INTEGER,
-            len INTEGER, rating INTEGER, count INTEGER);
+        CREATE TABLE Artist (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, name TEXT UNIQUE);
+        CREATE TABLE Album  (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, title TEXT UNIQUE, artist_id INTEGER);
+        CREATE TABLE Genre  (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, name TEXT UNIQUE);
+        CREATE TABLE Track  (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, title TEXT UNIQUE, album_id INTEGER, 
+                                                        genre_id INTEGER, len INTEGER, rating INTEGER, count INTEGER);
     ''')
 
-    # Parse XML with dicts
     tree = ET.parse(xmlfile) # ==fromString
     values = tree.findall('dict/dict/dict')
 
     # For each line of dict tree, search for song details
     for v in values:
-        # if (find_key(v, 'Track ID') is None): continue
+        if (find_key(v, 'Track ID') is None): continue # TODO: necessary
+
         v_name = find_key(v, 'Name')
         v_artist = find_key(v, 'Artist')
         v_album = find_key(v, 'Album')
+        v_genre = find_key(v, 'Genre')
         v_count = find_key(v, 'Play Count')
         v_rating = find_key(v, 'Rating')
         v_length = find_key(v, 'Total Time')
-        # print(v_name, v_artist, v_album, v_count, v_rating, v_length)
 
-        # Put this data to relevant SQL databases
-        sqlptr.execute('INSERT OR IGNORE INTO Artist(name) VALUES(?)', (v_artist, ))
+        if v_name is None or v_artist is None or v_album is None or v_genre is None or\
+           v_count is None or v_rating is None or v_length is None: continue
 
-        # Get the ID after insertion
-        sqlptr.execute('SELECT id FROM Artist WHERE name=?', (v_artist, ))
-        # Store it for reference
-        artist_id = sqlptr.fetchone()[0]
-        print(artist_id)
+        # First put the artist to db, later on fetch it's ID for related DB. Do similar for other relations.
+        sqlptr.execute('INSERT OR IGNORE INTO Artist(name) VALUES (?)', (v_artist,))
+        sqlptr.execute('SELECT id FROM Artist WHERE name = ?', (v_artist,))
+        common_artist_id = sqlptr.fetchone()[0]
+
+        sqlptr.execute('''INSERT OR IGNORE INTO Album(title, artist_id) VALUES (?, ?)''', (v_album, common_artist_id))
+        sqlptr.execute('SELECT id FROM Album WHERE title=?', (v_album,))
+        common_album_id = sqlptr.fetchone()[0]
+
+        sqlptr.execute('INSERT OR IGNORE INTO Genre(name) VALUES(?)', (v_genre, ))
+        sqlptr.execute('SELECT id FROM Genre WHERE name=?', (v_genre, ))
+        common_genre_id = sqlptr.fetchone()[0]
+
+        sqlptr.execute('''
+            INSERT OR REPLACE INTO Track(title, album_id, genre_id, len, rating, count) VALUES(?, ?, ?, ?, ?, ?)''',\
+            (v_name, common_album_id, common_genre_id, v_length, v_rating, v_count ))
+
+        sqldb.commit()
+        print(v_name + "\t--\t" + v_artist + "\t--\t" + v_album + "\t--\t" + v_genre)
+    sqldb.close()
 
 
 if __name__ == "__main__":
