@@ -29,7 +29,6 @@ def do_API_search():
     try:
         tree = json.loads(webcontent)
         # print(json.dumps(tree, indent=4))
-
     except:
         print("error loading content to json")
         tree = None
@@ -38,11 +37,8 @@ def do_API_search():
         print('==== Failure To Retrieve ====')
         print(webcontent)
 
-
     print(tree['results'][0]['place_id'])
     # print('"'+ str(x) + ':' + str(y) + '"')
-
-
 
 
 
