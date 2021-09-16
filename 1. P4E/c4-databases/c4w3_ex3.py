@@ -52,6 +52,7 @@ def read_xml_make_RDBMS(xmlfile):
     sqldb = sqlite3.connect('trackdb.sqlite')
     sqlptr = sqldb.cursor()
 
+    # prepare SQL databases
     sqlptr.executescript('''
         DROP TABLE IF EXISTS Artist;
         DROP TABLE IF EXISTS Album;
@@ -79,9 +80,11 @@ def read_xml_make_RDBMS(xmlfile):
             len INTEGER, rating INTEGER, count INTEGER);
     ''')
 
+    # Parse XML with dicts
     tree = ET.parse(xmlfile) # ==fromString
     values = tree.findall('dict/dict/dict')
 
+    # For each line of dict tree, search for song details
     for v in values:
         # if (find_key(v, 'Track ID') is None): continue
         v_name = find_key(v, 'Name')
@@ -90,8 +93,16 @@ def read_xml_make_RDBMS(xmlfile):
         v_count = find_key(v, 'Play Count')
         v_rating = find_key(v, 'Rating')
         v_length = find_key(v, 'Total Time')
-        print(v_name, v_artist, v_album, v_count, v_rating, v_length)
+        # print(v_name, v_artist, v_album, v_count, v_rating, v_length)
 
+        # Put this data to relevant SQL databases
+        sqlptr.execute('INSERT OR IGNORE INTO Artist(name) VALUES(?)', (v_artist, ))
+
+        # Get the ID after insertion
+        sqlptr.execute('SELECT id FROM Artist WHERE name=?', (v_artist, ))
+        # Store it for reference
+        artist_id = sqlptr.fetchone()[0]
+        print(artist_id)
 
 
 if __name__ == "__main__":
