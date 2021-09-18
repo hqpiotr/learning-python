@@ -3,9 +3,7 @@
     of email messages per organization (i.e. domain name of the email address)
     using a database with the following schema to maintain the counts.
 """
-import urllib.request
 import sqlite3
-import ssl
 import re
 
 # read the file
