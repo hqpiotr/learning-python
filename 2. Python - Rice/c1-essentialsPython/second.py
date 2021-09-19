@@ -37,7 +37,7 @@ def is_valid_date(year, month, day):
       False otherwise
     """
     if datetime.MINYEAR <= year <= datetime.MAXYEAR and \
-            1 <= month <= month <= 12 and \
+            1 <= month <= 12 and \
             1 <= day <= days_in_month(year, month):
         return True
     else:
