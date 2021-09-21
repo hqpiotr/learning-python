@@ -1,16 +1,16 @@
 # lists
 
 """
-    pop (index) // remove from the index, default last = -1)
-    remove('rabbit') // remove the element where value=
-    append(x) // at the end, if list - put a list o flists
-    .extend(smallerlist_to_be_added) // put values only, merge
-    .insert(index, val) // particular index and val
-    .copy (make a 2nd item) // reference ommitting problems
+    pop (index)                         // remove from the index, default last = -1)
+    remove('rabbit')                    // remove the element where value=
+    append(x)                           // at the end, if list - put a list o flists
+    .extend(smallerlist_to_be_added)    // put values only, merge
+    .insert(index, val)                 // particular index and val
+    .copy (make a 2nd item)             // reference ommitting problems
     .clear()
-    list.reverse // in list changes the vals, returns nothing
-    reversed(list) // return list, original not changed
-    .sort(key lambda, reverse=true) // write predicate for key
+    list.reverse                        // in list changes the vals, returns nothing
+    reversed(list)                      // return list, original not changed
+    .sort(key lambda, reverse=true)     // write predicate for key
 """
 
 l = list(range(0, 100, 10))

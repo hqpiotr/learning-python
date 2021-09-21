@@ -24,5 +24,5 @@
         """
 
 # find string difference
-  [i for i in range(len(string1) if string1[i] != string2[i])]
+  [i for i in range(len(string1)) if string1[i] != string2[i] ]
       # example: [a, x, 4]

@@ -6,8 +6,7 @@ street = "Hallera"
 building = "100"
 flat = "14"
 
-print("Country: {}, city: {}, street: {}, building: {},\
- flat: {}".format(country,city,street,building,flat))
+print("Country: {}, city: {}, street: {}, building: {}, flat: {}".format(country,city,street,building,flat))
 
 print("{0} mieszkam w {0}, mieszkam w {0}, mieszkam tu tu tu: {1}".format(country, city))
 print("----\n")

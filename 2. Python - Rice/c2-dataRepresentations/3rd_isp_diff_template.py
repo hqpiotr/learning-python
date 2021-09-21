@@ -1,23 +1,3 @@
-# list comprehension: if else --> [x+1 if x >= 45 else x+5 for x in list]
-# return longer string: max(string_1, string_2, key=len)
-#                      max(list?, key=len)
-#
-# enumerate elements in lists to get the index:
-#   for element in enumerate(list):
-#         print(element)
-#         --> ('0, eat')
-#         --> ('1, sleep')
-#         --> ('0, repeat')
-#
-#   for index, element in enumerate(list):
-#         print(index, "\t", element)
-#         --> 0     eat
-#         --> 1     sleep
-#         --> 0     repeat
-#
-# find string difference
-#   [i for i in range(len(string1) if string1[i] != string2[i])]
-#       example: [a, x, 4]
 """
 Project for Week 4 of "Python Data Representations".
 Find differences in file contents.
@@ -83,26 +63,13 @@ def singleline_diff(line1, line2):
 
       Returns IDENTICAL if the two lines are the same.
     """
-    # if line1 == line2:
-    #     print(line1)
-    #     print(line2)
-    #     return IDENTICAL
+    chars = [char for char in range(len(min(line1, line2, key=len))) if line1[char] != line2[char]]
 
-    if len(line1) == len(line2):
-        shorter = line1
-        longer = line2
-    else:
-        shorter = min(line1, line2, key=len)
-        longer = max(line1, line2, key=len)
-
-    index = IDENTICAL
-    # 1st solution: list comprehension
-    chars = [char for char in range(len(shorter)) if shorter[char] != longer[char]]
-    if not chars and longer != shorter:
-        index = len(shorter)
+    if not chars and line1 != line2:
+        return len(min(line1, line2, key=len))
     elif chars:
-        index = chars[0]
-    return index
+        return chars[0]
+    return IDENTICAL
 
 
 
