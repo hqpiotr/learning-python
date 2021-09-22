@@ -30,3 +30,8 @@ for i in enumerate(list_diff):
 
 for i, v in enumerate(list_diff):
     print(v)
+
+# SET - this is a list without duplicates. not sorted by automate
+# created as dict with one values only
+myset = {'abc', 'zoo', 'one', 'two', 'one', 'two', 'three', 'zee'}
+print("myset", sorted(myset))
