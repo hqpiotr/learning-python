@@ -5,6 +5,7 @@ from myfibo import print_fib
 from myfibo import fib as fibonacci
 
 
+
 myfibo.print_fib(5)
 print_fib(10)
 fibonacci(15)
@@ -14,7 +15,8 @@ useful = [x for x in dir(y) if not x.startswith("__") if not x.endswith(
     "__")]
 print(useful)
 
-
+# print(fibo_var) error
+print(myfibo.fibo_var)
 # Packages
 """
 To be able to use . dotted line calling: myfibo.fib
