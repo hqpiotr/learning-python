@@ -20,8 +20,8 @@ cipher = {'p': 'o', 'y': 'h', 't': 'n',
 # print(cipher)
 
 decipher = cipher.keys()
-devalued =  reversed(cipher.values())
-
+devalued = reversed(cipher.values())
+print(decipher)
 l = "".join(list(decipher))
 print(l)
 # print([i for i in l])

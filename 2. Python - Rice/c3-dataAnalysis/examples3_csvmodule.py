@@ -40,3 +40,4 @@ print("")
 
 table2 = parse("hightemp2.csv")
 print_table(table2)
+

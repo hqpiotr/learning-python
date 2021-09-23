@@ -29,6 +29,9 @@ for i in m:
     print(i)
 print("result =", compute_diagonal(m))
 
+#TODO: important, auto list matrix
 auto_list = [[i + 4*j for i in range(1, 5)] for j in range(1, 5)]
+new_list = [[i for i in range(5)] for j in range(5)]
 for x in auto_list:
     print(x)
+print(new_list)

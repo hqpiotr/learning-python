@@ -12,7 +12,7 @@ for row in range(NUM_ROWS):
 # print(my_matrix)
 d_frmt = '{:<4} {:<4}'
 for k,v in my_matrix.items():
-    print(k, "-->", v)
+    print("{", k, "}", "\t", v)
 
 frmt = '{:<4}'
 # print the matrix

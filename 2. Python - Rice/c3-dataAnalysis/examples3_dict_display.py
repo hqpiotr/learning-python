@@ -1,16 +1,12 @@
 """
 Example code for printing the contents of a dictionary to the console
 """
-
-
 NAME_DICT = {"Warren" : "Joe", "Rixner" : "Scott", "Greiner" : "John"}
-
 def run_dict_methods():
     """
     Run some simple examples of calls to dictionary methods
     """
-    
-    # Note that these methods return an iterable object (similar to range())
+        # Note that these methods return an iterable object (similar to range())
     print(NAME_DICT.keys())
     print(NAME_DICT.values())
     print(NAME_DICT.items())
@@ -21,9 +17,7 @@ def run_dict_methods():
     print(list(NAME_DICT.values()))
     print(list(NAME_DICT.items()))
 
-run_dict_methods()
-
-
+# run_dict_methods()
 
 
 def print_dict_keys(my_dict):
@@ -55,4 +49,4 @@ def run_print_dict_examples():
     print()
     print_dict_items(NAME_DICT)
     
-#run_print_dict_examples()
+run_print_dict_examples()

@@ -10,8 +10,8 @@ simple_dict["Stas"] = 4
 print(simple_dict["Stas"])
 ##print(simple_dict)
 
-#bad_dict = {["Joe", "Warren"] : 1, ["Scott", "Rixner"] : 2, ["John", "Greiner"] : 3}
-#print(bad_dict)
+# bad_dict = {["Joe", "Warren"] : 1, ["Scott", "Rixner"] : 2, ["John", "Greiner"] : 3}
+# print(bad_dict)
 
 good_dict = {("Joe", "Warren") : 1, ("Scott", "Rixner") : 2, ("John", "Greiner") : 3}
 x = "Joe" in good_dict
@@ -19,19 +19,15 @@ print(x)
 
 #print(good_dict)
 
-
 # Examples of dictionary lookup
-#print(simple_dict["Joe"])
-#print(simple_dict["Scott"])
-#print(simple_dict["Stephen"])
-#print(good_dict[("Joe", "Warren")])
-#print(good_dict[("John", "Greiner")])
-
-
+# print(simple_dict["Joe"])
+# print(simple_dict["Scott"])
+# print(simple_dict["Stephen"])
+# print(good_dict[("Joe", "Warren")])
+# print(good_dict[("John", "Greiner")])
 
 
 # Custom code for looking up keys that may not always be present
-
 def lookup(my_dict, my_key, default_value=None):
     """
     Given dictionary my_dict and key my_key, 
@@ -48,17 +44,11 @@ def lookup(my_dict, my_key, default_value=None):
 #print(lookup(simple_dict, "Stephen", -1))
 #print(lookup(simple_dict, "Stephen"))
 
-
-
-
-
-
-
 # Built-in Python dictionary method get() in place of lookup()
-#simple_dict = {"Joe" : 1, "Scott" : 2, "John" : 3}
-#print(simple_dict.get("Joe", -1))
-#print(simple_dict.get("Stephen", -1))
-#print(simple_dict.get("Stephen"))		# default value if parameter is omitted is None
+simple_dict = {"Joe" : 1, "Scott" : 2, "John" : 3}
+print(simple_dict.get("Joe", -1))
+print(simple_dict.get("Stephen", -1))
+print(simple_dict.get("Stephen"))		# default value if parameter is omitted is None
 
 # Note that we can acheive the same effect in lookup() 
 # via default parameter definition of the form "default_value = None"

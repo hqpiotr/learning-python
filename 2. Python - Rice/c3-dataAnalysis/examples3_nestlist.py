@@ -23,7 +23,9 @@ format_string = "{:<20}  {:>4}  {:>4}  {:>4}  {:>4}  {:>4}  {:>4}  {:>4}"
 
 # Display langauges table
 headers = popularity[0]
+print("headers:", headers)
 header_row = format_string.format(*headers)
+print("header_row:", header_row)
 print(header_row)
 print("-" * len(header_row))
 

@@ -9,7 +9,7 @@ a dictionary letter_count whose keys are the lower case letters and whose values
 the corresponding number of occurrences of each letter in the strings in word_list..
 """
 
-def count_letters(word_list):
+def find_most_occurences(word_list):
     chars = {}
     word_list = word_list.replace(" ", "")
 
@@ -25,6 +25,6 @@ def count_letters(word_list):
         break
 
 
-# my_string = "isten strange women lying in ponds distributing swords is no basis for a system of government supreme executive power derives from a mandate from the masses not from some farcical aquatic ceremony"
-# count_letters(my_string)
+my_string = "isten strange women lying in ponds distributing swords is no basis for a system of government supreme executive power derives from a mandate from the masses not from some farcical aquatic ceremony"
+find_most_occurences(my_string)
 
