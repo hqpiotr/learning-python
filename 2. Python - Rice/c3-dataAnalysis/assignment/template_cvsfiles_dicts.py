@@ -46,18 +46,14 @@ def read_csv_as_list_dict(filename, separator, quote):
                                    delimiter=separator,
                                    quotechar=quote)
 
-        for _ in csvreader:
-            nested_row_dict = {}
-
-            # print(line)
-            # row0  field1: val1, field2: val2
-            # row1  field1: val3, field2: val4
-            # nested_row_dict = collections.OrderedDict()
+        for row in csvreader:
+            list_of_dicts.append(row)
             # OK: WORKING 4 lines, but commented
-            for col in range(len(csvreader.fieldnames)):
-                nested_row_dict[csvreader.fieldnames[col]] =\
-                    nested_row_dict.get(csvreader.fieldnames[col], col)
-            list_of_dicts.append(nested_row_dict)
+            # nested_row_dict = {}
+            # for col in range(len(csvreader.fieldnames)):
+            #     nested_row_dict[csvreader.fieldnames[col]] =\
+            #         nested_row_dict.get(csvreader.fieldnames[col], col)
+            # list_of_dicts.append(nested_row_dict)
     return list_of_dicts
 
 """
@@ -161,9 +157,9 @@ def write_csv_from_list_dict(filename, table, fieldnames, separator, quote):
 
 
 # Testing #2
-# t_l_d = read_csv_as_list_dict('hightemp.csv', ',', '"')
+t_l_d = read_csv_as_list_dict('hightemp.csv', ',', '"')
 # print_list_of_dicts(t_l_d)
-# print_list_of_dicts_v2(t_l_d)
+print_list_of_dicts_v2(t_l_d)
 # t_l_d = read_csv_as_list_dict('table2.csv', ',', '"')
 # t_l_d = read_csv_as_list_dict('table3.csv', ',', "'")
 # t_l_d = read_csv_as_list_dict('table4.csv', ',', '"')
@@ -176,8 +172,8 @@ def write_csv_from_list_dict(filename, table, fieldnames, separator, quote):
 # print_nested_dict(n2d)
 
 # Testing #4
-name = 'table1.csv'
-fieldnames = read_csv_fieldnames(name, ',', '"')
-mytable = read_csv_as_list_dict(name, ',', '"')
-print(mytable)
+# name = 'table1.csv'
+# fieldnames = read_csv_fieldnames(name, ',', '"')
+# mytable = read_csv_as_list_dict(name, ',', '"')
+# print(mytable)
 # write_csv_from_list_dict('output.csv', mytable, fieldnames, ',', '"')

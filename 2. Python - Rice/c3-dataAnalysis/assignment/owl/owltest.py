@@ -43,12 +43,8 @@ def read_csv_as_list_dict(filename, separator, quote):
                                    delimiter=separator,
                                    quotechar=quote)
 
-        for _ in csvreader:
-            nested_row_dict = {}
-            for col in range(len(csvreader.fieldnames)):
-                nested_row_dict[csvreader.fieldnames[col]] =\
-                    nested_row_dict.get(csvreader.fieldnames[col], col)
-            list_of_dicts.append(nested_row_dict)
+        for row in csvreader:
+            list_of_dicts.append(row)
     return list_of_dicts
 
 
