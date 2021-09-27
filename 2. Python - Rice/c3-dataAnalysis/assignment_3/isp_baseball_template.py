@@ -29,7 +29,6 @@ baseballdatainfo = {
                     "battingfields": ["AB", "H", "2B", "3B", "HR", "BB"]}
 
 
-
 def print_nested_dict(table):
     """
     Function for printing dict.
@@ -41,7 +40,6 @@ def print_nested_dict(table):
     for key, value in table.items():
         print(f'{key:<12} {value}', end="\n")
 
-
 def print_list_of_dicts(table):
     """
     Function to list the contents
@@ -52,7 +50,6 @@ def print_list_of_dicts(table):
     """
     for value in table:
         print(value, end='\n')
-
 
 def read_csv_as_list_dict(filename, separator, quote):
     """
@@ -83,9 +80,8 @@ def read_csv_as_list_dict(filename, separator, quote):
             baseballdatainfo['triples'] = 'triples'
             baseballdatainfo['homeruns'] = 'homers'
             baseballdatainfo['walks'] = 'walks'
-            baseballdatainfo['battingfields'] = []
+            baseballdatainfo['battingfields'] = ['atbats', 'hits', 'doubles', 'triples', 'homers', 'walks']
             # print("SWAPPED OUT!\n")
-
     return table
 
 
@@ -121,11 +117,8 @@ def read_csv_as_nested_dict(filename, keyfield, separator, quote):
             baseballdatainfo['homeruns'] = 'homers'
             baseballdatainfo['walks'] = 'walks'
             baseballdatainfo['battingfields'] = []
-            # print("AGAIN... SWAPPED OUT!\n")
 
             overwritten_key = baseballdatainfo['playerid']
-            # print(overwritten_key)
-
         for row in csvreader:
             rowid = row[overwritten_key]
             table[rowid] = row
@@ -183,13 +176,8 @@ def slugging_percentage(info, batting_stats):
         return 0
 
 
-##
 ## Part 1: Functions to compute top batting statistics by year
-##
 
-# 1: filter_by_year([{'year1': '1', 'year2': '2', 'year3': '3'}],   1, 'year1')
-# 2: filter_by_year([{'year1': '1', 'year2': '2', 'year3': '3'}],   1, 'year2')
-# expected [] but received [{'year1': '1', 'year2': '2', 'year3': '3'}]
 def filter_by_year(statistics, year, yearid):
     """
     Inputs:
@@ -221,8 +209,6 @@ def filter_by_year(statistics, year, yearid):
             result.append(line)
     return result
 
-
-#                 (info, filtered_year, formula, numplayers)
 def top_player_ids(info, statistics, formula, numplayers):
     """
     Inputs:
@@ -247,7 +233,6 @@ def top_player_ids(info, statistics, formula, numplayers):
         players.append((line[info['playerid']], formula(baseballdatainfo, line)))
     players.sort(key=lambda pair: pair[1], reverse=True)
     return players[:numplayers]
-
 
 def lookup_player_names(info, top_ids_and_stats):
     """
@@ -284,7 +269,6 @@ def lookup_player_names(info, top_ids_and_stats):
 
     return res_strings
 
-
 def compute_top_stats_year(info, formula, numplayers, year):
     """
     Inputs:
@@ -310,74 +294,8 @@ def compute_top_stats_year(info, formula, numplayers, year):
     # print("AFTER ALL: ", baseballdatainfo)
     return names
 
-#####################################################################
-#####################################################################
-#####################################################################
 
-
-def my_tests():
-    """
-    Testing function only.
-    Input:
-        - none
-    Output:
-        - none
-    :return: Testing results only
-    """
-    ### First function testing ###
-
-    # batting_table = read_csv_as_list_dict(baseballdatainfo['battingfile'],
-    #                                    baseballdatainfo['separator'],
-    #                                    baseballdatainfo['quote'])
-    # year_data_list_dict = filter_by_year(batting_table, YEAR, YEAR)
-    # print_list_of_dicts(year_data_list_dict)
-
-
-    ### Second funtion testing ###
-    # top_batting = top_player_ids(baseballdatainfo, year_data_list_dict, batting_average, 2)
-    # print('TOP Batting:\t', top_batting)
-    # top_slugging = top_player_ids(baseballdatainfo, year_data_list_dict, slugging_percentage, 2)
-    # print('TOP Slugging:\t', top_slugging, "\n")
-
-    ### Third: mapping to names ###
-    # players_battling_names = lookup_player_names(baseballdatainfo,top_batting)
-    # for player in players_battling_names:
-    #     print(player)
-
-    ### Fourth: top stats per year
-    top_sth_year = compute_top_stats_year(baseballdatainfo, batting_average, 5, YEAR)
-    for index in top_sth_year:
-        print(index, end="\n")
-    top_sth_year.clear()
-    print()
-
-    print(filter_by_year([{'year1': '1', 'year2': '2', 'year3': '3'}], 1, 'year1'))
-    print(filter_by_year([{'year1': '1', 'year2': '2', 'year3': '3'}],   1, 'year2'))
-
-    # filter_by_year(statistics, year, yearid):
-    #
-    # top_sth_year = compute_top_stats_year(baseballdatainfo, onbase_percentage, 2, YEAR)
-    # for index in top_sth_year: print(index, end="\n")
-    # top_sth_year.clear()
-    # print()
-    #
-    # top_sth_year = compute_top_stats_year(baseballdatainfo, slugging_percentage, 2, YEAR)
-    # for index in top_sth_year: print(index, end="\n")
-    # top_sth_year.clear()
-    # print()
-
-
-#####################################################################
-#####################################################################
-my_tests()
-#####################################################################
-#####################################################################
-
-
-
-##
 ## Part 2: Functions to compute top batting statistics by career
-##
 
 def aggregate_by_player_id(statistics, playerid, fields):
     """
@@ -390,7 +308,16 @@ def aggregate_by_player_id(statistics, playerid, fields):
       are dictionaries of aggregated stats.  Only the fields from the fields
       input will be aggregated in the aggregated stats dictionaries.
     """
-    return {}
+    aggregate = {}
+    for item in statistics:
+        if not item[playerid] in aggregate:
+            aggregate[item[playerid]] = {playerid: item[playerid]}
+            for field in fields:
+                aggregate[item[playerid]][field] = 0
+        for field in fields:
+            value = int(item[field])
+            aggregate[item[playerid]][field] += value
+    return aggregate
 
 
 def compute_top_stats_career(info, formula, numplayers):
@@ -402,13 +329,78 @@ def compute_top_stats_career(info, formula, numplayers):
                     computes a compound statistic
       numplayers  - Number of top players to return
     """
-    return []
+    csv_input = read_csv_as_list_dict(info["battingfile"],
+                                     info["separator"],
+                                     info["quote"])
+    aggr_stats_dict = aggregate_by_player_id(csv_input, info["playerid"],
+                                             info["battingfields"])
+    aggr_stats = list(aggr_stats_dict.values())
+    top_ids = top_player_ids(info, aggr_stats, formula, numplayers)
+    list_of_strings = lookup_player_names(info, top_ids)
+    return list_of_strings
 
 
-##
+#####################################################################
+#####################################################################
+#####################################################################
+
+def my_tests():
+    """
+    Testing function only.
+    Input:
+        - none
+    Output:
+        - none
+    :return: Testing results only
+    """
+
+    ### First function testing ###
+    batting_table = read_csv_as_list_dict(baseballdatainfo['battingfile'],
+                                       baseballdatainfo['separator'],
+                                       baseballdatainfo['quote'])
+    year_data_list_dict = filter_by_year(batting_table, YEAR, baseballdatainfo['yearid'])
+    print_list_of_dicts(year_data_list_dict)
+
+
+    ### Second funtion testing ###
+    top_batting = top_player_ids(baseballdatainfo, year_data_list_dict, batting_average, 2)
+    # print('TOP Batting:\t', top_batting)
+    top_slugging = top_player_ids(baseballdatainfo, year_data_list_dict, slugging_percentage, 2)
+    # print('TOP Slugging:\t', top_slugging, "\n")
+
+    ### Third: mapping to names ###
+    players_battling_names = lookup_player_names(baseballdatainfo,top_batting)
+    for player in players_battling_names:
+        print(player)
+
+    ### Fourth: top stats per year
+    top_sth_year = compute_top_stats_year(baseballdatainfo, batting_average, 5, YEAR)
+    for index in top_sth_year:
+        print(index, end="\n")
+    top_sth_year.clear()
+    print()
+
+    # Fith: Year filtering errors from Owltest
+    # print(filter_by_year([{'year1': '1', 'year2': '2', 'year3': '3'}], 1, 'year1'))
+    # print(filter_by_year([{'year1': '1', 'year2': '2', 'year3': '3'}],   1, 'year2'))
+
+    # Part2:
+    fields_required = ['player', 'stat2', 'stat1']
+    input_test = [{'player': '1', 'stat1': '3', 'stat2': '4', 'stat3': '5'},\
+                  {'player': '1', 'stat1': '2', 'stat2': '1', 'stat3': '8'},\
+                  {'player': '1', 'stat1': '5', 'stat2': '7', 'stat3': '4'}]
+    # print(aggregate_by_player_id(input_test, 'player', fields_required))
+
+    print(compute_top_stats_career(baseballdatainfo, batting_average, 2))
+
+#####################################################################
+my_tests()
+#####################################################################
+
+
+
+
 ## Provided testing code
-##
-
 
 def test_baseball_statistics():
     """
