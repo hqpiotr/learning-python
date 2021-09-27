@@ -58,8 +58,11 @@ def select_columns(my_table, col_indices):
     Output: Nested list corresponding to sub-table formed by
     columns in col_indices
     """
-
-    return []
+    result = []
+    for line in my_table:
+        partial = [my_table[col] for col in col_indices ]
+        result.append(partial)
+    return result
 
 
 def sort_by_column(my_table, col_idx):
@@ -68,8 +71,8 @@ def sort_by_column(my_table, col_idx):
     Action: Mutate the order of the rows in my_table such that the entries in
     the column col_idx appear in DESCENDING order when interpreted as numbers
     """
-    
-    pass
+    my_table.sort(key=lambda row: row[col_idx], reverse=True)
+    # pass
     
     
     
