@@ -30,11 +30,11 @@ def csv_delimiter_examples():
     """
     Run some example of reading CSV files using different delimiter options
     """
-    number_table = read_csv_file("number_table.csv", " ")
+    number_table = read_csv_file("../week2/assignment/number_table.csv", " ")
     print("jezus")
     print_table(number_table)
     print()
-    name_table = read_csv_file("name_table.csv", ",")
+    name_table = read_csv_file("../week2/assignment/name_table.csv", ",")
     print_table(name_table)
 
 
@@ -61,12 +61,12 @@ def csv_quoting_examples():
     """
     Run some example of writing 2D tables as CSV files using various quoting options
     """
-    name_table = read_csv_file("name_table.csv", ",")
+    name_table = read_csv_file("../week2/assignment/name_table.csv", ",")
     print("dupa")
     name_table.append([1, 2, 3])
-    write_csv_file(name_table, "name_table_minimal.csv", ",", csv.QUOTE_MINIMAL)
-    write_csv_file(name_table, "name_table_all.csv", ",", csv.QUOTE_ALL)
-    write_csv_file(name_table, "name_table_nonnumeric.csv", ",", csv.QUOTE_NONNUMERIC)
+    write_csv_file(name_table, "../week2/assignment/name_table_minimal.csv", ",", csv.QUOTE_MINIMAL)
+    write_csv_file(name_table, "../week2/assignment/name_table_all.csv", ",", csv.QUOTE_ALL)
+    write_csv_file(name_table, "../week2/assignment/name_table_nonnumeric.csv", ",", csv.QUOTE_NONNUMERIC)
     #write_csv_file(name_table, "name_table_none.csv", ",", csv.QUOTE_NONE)        # no escapechar is set for lots of quotes
 
     

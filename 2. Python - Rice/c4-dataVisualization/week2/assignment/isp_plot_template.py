@@ -84,12 +84,15 @@ def build_plot_values(gdpinfo, gdpdata):
     years = list(range(int(gdpinfo['min_year']), int(gdpinfo['max_year']) + 1))
     tuples = []
 
-    for country in gdpdata:
-        if country != 'Not classified':
-            for year in years:
-                if country == str(year):
-                    if gdpdata[country] != '':
-                        tuples.append((int(year), float(gdpdata[country])))
+    # TODO: Alternatively, use list comprehension:
+    tuples = [(int(year), float(gdpdata[country])) for year in years for country in gdpdata if country == str(year) and gdpdata[country] != '']
+
+    # for country in gdpdata:
+    #     if country != 'Not classified':
+    #         for year in years:
+    #             if country == str(year):
+    #                 if gdpdata[country] != '':
+    #                     tuples.append((int(year), float(gdpdata[country])))
     return tuples
 
 
@@ -142,15 +145,28 @@ def render_xy_plot(gdpinfo, country_list, plot_file):
     """
 
     data = build_plot_dict(gdpinfo, country_list)
-    xy_chart = pygal.XY(title="GDP per country throughout the years", x_title="Year", y_title="Gross Domestic Product")
+    xy_chart = pygal.XY(title="GDP per country throughout the years",
+                        x_title="Year",
+                        y_title="Gross Domestic Product")
 
-    for country in country_list:
-        for k,v in data.items():
-            if k == country:
-                country_coords = v
-                print(f'{country:<30}{country_coords}')
-                xy_chart.add(country, country_coords)
-                break
+    # TODO: Alternatively, use list comprehension:
+    #   - condition:
+    #       - if key from dict is a country
+    #   - two loops,
+    #       - external: for each country
+    #       - internal: for each element in dictionary {country + (x_coord, y_coord)}
+    #   - return:
+    #       - tuple which is being added to chart, for specific country, per each year
+    country_coords = [xy_chart.add(country, v) for k, v in data.items() for country in country_list if k == country]
+
+    # for country in country_list:
+    #     for k,v in data.items():
+    #         if k == country:
+    #             country_coords = v
+    #             print(f'{country:<30}{country_coords}')
+    #             xy_chart.add(country, country_coords)
+    #             break
+
     xy_chart.render_in_browser()
     xy_chart.render_to_file(plot_file)
 
