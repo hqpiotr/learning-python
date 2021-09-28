@@ -140,62 +140,50 @@ def render_xy_plot(gdpinfo, country_list, plot_file):
       specified by gdpinfo for the countries in country_list.
       The image will be stored in a file named by plot_file.
     """
+
+    data = build_plot_dict(gdpinfo, country_list)
+    xy_chart = pygal.XY(title="GDP per country throughout the years", x_title="Year", y_title="Gross Domestic Product")
+
+    for country in country_list:
+        for k,v in data.items():
+            if k == country:
+                country_coords = v
+                print(f'{country:<30}{country_coords}')
+                xy_chart.add(country, country_coords)
+                break
+    xy_chart.render_in_browser()
+    xy_chart.render_to_file(plot_file)
+
     return
+
 
 def test_render_xy_plot():
     """
     Code to exercise render_xy_plot and generate plots from
     actual GDP data.
     """
-    # gdpinfo = {
-    #     "gdpfile": "isp_gdp.csv",
-    #     "separator": ",",
-    #     "quote": '"',
-    #     "min_year": 1960,
-    #     "max_year": 2015,
-    #     "country_name": "Country Name",
-    #     "country_code": "Country Code"
-    # }
-    # SAMPLE_NUMBER_OF_COUNTRIES = 1
+    gdpinfo = {
+        "gdpfile": "isp_gdp.csv",
+        "separator": ",",
+        "quote": '"',
+        "min_year": 1960,
+        "max_year": 2015,
+        "country_name": "Country Name",
+        "country_code": "Country Code"
+    }
+
+    SAMPLE_NUMBER_OF_COUNTRIES = 10
     # SAMPLE_NUMBER_OF_YEAR_TUPLES = 10
-    # 1:
-    # csvdata = read_csv_as_nested_dict(gdpinfo['gdpfile'], 'Country Name', gdpinfo['separator'], gdpinfo['quote'])
-    # countries_only_csvdata = list(csvdata.keys())
-    # random.shuffle(countries_only_csvdata)
-    # countries_only_csvdata = countries_only_csvdata[:SAMPLE_NUMBER_OF_COUNTRIES]
-    # print(countries_only_csvdata)
-    # print_some_examples_from_csv(csvdata, 2)
-    # print_some_examples_from_csv(csvdata, 1, 'Poland')
+    csvdata = read_csv_as_nested_dict(gdpinfo['gdpfile'], 'Country Name', gdpinfo['separator'], gdpinfo['quote'])
+    countries_only_csvdata = list(csvdata.keys())
+    random.shuffle(countries_only_csvdata)
+    countries_only_csvdata = countries_only_csvdata[:SAMPLE_NUMBER_OF_COUNTRIES]
+    print(countries_only_csvdata)
 
-    # 2:
-    # tuples = build_plot_values(gdpinfo, csvdata[countries_only_csvdata[0]])
-    # tuples = build_plot_values(gdpinfo, csvdata['Poland'])
-    # print(tuples)
-    # print("-" * 100 + "\n" + countries_only_csvdata[0])
-    # print_tuples_nl(tuples[:SAMPLE_NUMBER_OF_YEAR_TUPLES])
-
-    # 3:
-    # plot_dict = build_plot_dict(gdpinfo, csvdata[countries_only_csvdata[0]])
-    # plot_dict = build_plot_dict(gdpinfo, ['Poland'])
-    # print(plot_dict)
-
-    # TEST:
-    # build_plot_dict(
-    # {'gdpfile': 'gdptable1.csv', 'separator': ',', 'quote': '"', 'min_year': 2000, 'max_year': 2005,
-    #                  'country_name': 'Country Name', 'country_code': 'Code'},
-    #                  ['Country3'])
-    # expected     {'Country3': []}
-    # but     received     {}
-
-    # Auto-generated
-    # render_xy_plot(gdpinfo, [], "isp_gdp_xy_none.svg")
-    # render_xy_plot(gdpinfo, ["China"], "isp_gdp_xy_china.svg")
-    # render_xy_plot(gdpinfo, ["United Kingdom", "United States"],
-    #                "isp_gdp_xy_uk+usa.svg")
+    # render_xy_plot(gdpinfo, ["United Kingdom", "United States"], "_my_chart_uk+usa.svg")
+    render_xy_plot(gdpinfo, countries_only_csvdata, "_my_chart_big.svg")
+    # render_xy_plot(gdpinfo, ['Poland', 'Germany', 'Czech Republic', 'Slovakia', 'United Kingdom'], "_my_chart_big.svg")
 
 
-# Make sure the following call to test_render_xy_plot is commented out
-# when submitting to OwlTest/CourseraTest.
-
-#test_render_xy_plot()
+test_render_xy_plot()
 
