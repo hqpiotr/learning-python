@@ -34,3 +34,4 @@ print("minimums:", mins)
 # Create a list only of tuples where the second item is less than the first
 newtups = list(filter(lambda pair: pair[1] < pair[0], tups))
 print("filtered:", newtups)
+
