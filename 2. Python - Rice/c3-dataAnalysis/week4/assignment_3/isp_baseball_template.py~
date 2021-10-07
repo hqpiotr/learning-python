@@ -10,12 +10,12 @@ YEAR = 2006
 
 # moved to here.
 baseballdatainfo = {
-                    # "masterfile": "Master_2016.csv",   # Name of Master 
-                    "masterfile": "testing_csv/master2.csv",   # Name of Master# 
-                    # "battingfile": "Batting_2016.csv", # Name of Batting 
-                    "battingfile": "testing_csv/batting2.csv", # Name of Batting 
-                    "separator": ",",                  # Separator character in 
-                    "quote": '"',                      # Quote character in 
+                    # "masterfile": "Master_2016.csv",   # Name of Master CSV file
+                    "masterfile": "testing_csv/master2.csv",   # Name of Master# CSV file
+                    # "battingfile": "Batting_2016.csv", # Name of Batting CSV file
+                    "battingfile": "testing_csv/batting2.csv", # Name of Batting CSV # file
+                    "separator": ",",                  # Separator character in CSV files
+                    "quote": '"',                      # Quote character in CSV files
                     "playerid": "playerID",            # Player ID field name
                     "firstname": "nameFirst",          # First name field name
                     "lastname": "nameLast",            # Last name field name

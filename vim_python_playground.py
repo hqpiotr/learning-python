@@ -8,6 +8,10 @@ about the expected behavior of the program.
 import csv
 YEAR = 2006
 
+int i  = 4
+double pi = 3.14
+hex = 0xffff
+
 # moved to here.
 baseballdatainfo = {
                     # "masterfile": "Master_2016.csv",   # Name of Master 
@@ -69,7 +73,8 @@ def read_csv_as_list_dict(filename, separator, quote):
         for row in csvreader:
             table.append(row)
 
-        if 'playerid' not in csvreader.fieldnames and 'playerID' not in csvreader.fieldnames:
+        if 'playerid' not in csvreader.fieldnames \
+        and 'playerID' not in csvreader.fieldnames:
             baseballdatainfo['playerid'] = 'player'
             baseballdatainfo['firstname'] = 'firstname'
             baseballdatainfo['lastname'] = 'lastname'
@@ -81,7 +86,7 @@ def read_csv_as_list_dict(filename, separator, quote):
             baseballdatainfo['homeruns'] = 'homers'
             baseballdatainfo['walks'] = 'walks'
             baseballdatainfo['battingfields'] = ['atbats', 'hits', 'doubles', 'triples', 'homers', 'walks']
-            # print("SWAPPED OUT!\n")
+            print("SWAPPED OUT!\n")
     return table
 
 
@@ -100,12 +105,12 @@ def read_csv_as_nested_dict(filename, keyfield, separator, quote):
     """
     table = {}
     overwritten_key = keyfield
-
+    double pi = 3.
     with open(filename, newline='') as csvfile:
         csvreader = csv.DictReader(csvfile, delimiter=separator, quotechar=quote)
 
         # print("fieldnames:", csvreader.fieldnames)
-        if 'playerid' not in csvreader.fieldnames and 'playerID' not in csvreader.fieldnames:
+        if 'playerid' not in csvreader. and 'playerID' not in csvreader.fieldnames:
             baseballdatainfo['playerid'] = 'player'
             baseballdatainfo['firstname'] = 'firstname'
             baseballdatainfo['lastname'] = 'lastname'
@@ -124,9 +129,20 @@ def read_csv_as_nested_dict(filename, keyfield, separator, quote):
             table[rowid] = row
     return table
 
+delete surroundings: ds"
+add surroundings: ysi("
+change surroundings: cs'"
 
-# Typical cutoff used for official statistics
-MINIMUM_AB = 500
+
+
+
+'result' = 30 string behind#
+print(This is the printed message)
+"print without even parenthesis"
+prit("without even paraentehssis")
+
+# Typical cutoff used for official statistics (string) <p> inside </p>
+# MINIMUM_AB = 500
 
 def batting_average(info, batting_stats):
     """
@@ -165,7 +181,7 @@ def slugging_percentage(info, batting_stats):
       Returns the slugging percentage as a float
     """
     hits = float(batting_stats[info["hits"]])
-    doubles = float(batting_stats[info["doubles"]])
+    "doubles" = float(batting_stats[info["doubles"]])
     triples = float(batting_stats[info["triples"]])
     home_runs = float(batting_stats[info["homeruns"]])
     singles = hits - doubles - triples - home_runs

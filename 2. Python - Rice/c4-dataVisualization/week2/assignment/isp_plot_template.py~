@@ -107,7 +107,7 @@ def build_plot_dict(gdpinfo, country_list):
 
     Output:
       Returns a dictionary whose keys are the country names in
-      country_list and whose values are lists of XY plot values
+      country_list and whose values are lists of XY plot values 
       computed from the CSV file described by gdpinfo.
 
       Countries from country_list that do not appear in the
